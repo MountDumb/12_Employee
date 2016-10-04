@@ -11,6 +11,7 @@ namespace _12_Employee
         {
             return new EmployeeRepository();
         }
+        
 
         [TestMethod]
         public void Clear() 
@@ -25,45 +26,45 @@ namespace _12_Employee
             
         }
 
-        //[TestMethod]
-        //public void Create() 
-        //{
-        //    EmployeeRepository repository = CreateRepository();
-        //    repository.Clear();
-        //    Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
-        //    Assert.AreEqual("simon Chaffee", simon.Name);
-        //    Assert.AreEqual("Teacher", simon.Type);
-        //    Assert.IsTrue(simon.Id != 0);
-        //    Employee nick = repository.CreateEmployee("Nick Chaffee", "Translator");
-        //    Assert.IsTrue(nick.Id != 0);
-        //    Assert.IsTrue(nick.Id != simon.Id);
-        //}
+        [TestMethod]
+        public void Create()
+        {
+            EmployeeRepository repository = CreateRepository();
+            repository.Clear();
+            Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
+            Assert.AreNotEqual("simon Chaffee", simon.Name);
+            Assert.AreEqual("Teacher", simon.Type);
+            Assert.IsTrue(simon.Id != 0);
+            Employee nick = repository.CreateEmployee("Nick Chaffee", "Translator");
+            Assert.IsTrue(nick.Id != 0);
+            Assert.IsTrue(nick.Id != simon.Id);
+        }
+
+        [TestMethod]
+        public void SaveAndCount()
+        {
+            EmployeeRepository repository = CreateRepository();
+            repository.Clear();
+            Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
+            repository.SaveEmployee(simon);
+            Assert.AreEqual(1, repository.CountEmployees());
+
+        }
+
+        [TestMethod]
+        public void SaveAndLoad()
+        {
+            EmployeeRepository repository = CreateRepository();
+            repository.Clear();
+            Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
+            repository.SaveEmployee(simon);
+            Employee loadedsimon = repository.LoadEmployee(simon.Id);
+            Assert.AreEqual(simon, loadedsimon);
+
+        }
 
         //[TestMethod]
-        //public void SaveAndCount() 
-        //{
-        //    EmployeeRepository repository = CreateRepository();
-        //    repository.Clear();
-        //    Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
-        //    repository.SaveEmployee(simon);
-        //    Assert.AreEqual(1, repository.CountEmployees());
-            
-        //}
-
-        //[TestMethod]
-        //public void SaveAndLoad() 
-        //{
-        //    EmployeeRepository repository = CreateRepository();
-        //    repository.Clear();
-        //    Employee simon = repository.CreateEmployee("Simon Stochholm", "Teacher");
-        //    repository.SaveEmployee(simon);
-        //    Employee loadedsimon = repository.LoadEmployee(simon.Id);
-        //    Assert.AreEqual(simon, loadedsimon);
-            
-        //}
-
-        //[TestMethod]
-        //public void SaveAndLoadTwoEmployees() 
+        //public void SaveAndLoadTwoEmployees()
         //{
         //    EmployeeRepository repository = CreateRepository();
         //    repository.Clear();
@@ -74,7 +75,7 @@ namespace _12_Employee
         //    Assert.AreEqual(2, repository.CountEmployees());
         //    Employee loadedNick = repository.LoadEmployee(nick.Id);
         //    Assert.AreEqual(nick, loadedNick);
-            
+
         //}
 
         //[TestMethod]
@@ -90,7 +91,7 @@ namespace _12_Employee
         //    List<Employee> all = repository.FindAllEmployees();
         //    CollectionAssert.Contains(all, simon);
         //    CollectionAssert.Contains(all, nick);
-            
+
         //}
 
         //[TestMethod]
@@ -104,7 +105,7 @@ namespace _12_Employee
         //    repository.SaveEmployee(nick);
         //    nick = repository.LoadEmployee(nick.Id);
         //    Assert.AreEqual("Sous chef", nick.Type);
-            
+
         //}
     }
 }
