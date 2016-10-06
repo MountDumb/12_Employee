@@ -54,7 +54,13 @@ namespace _12_Employee
             StreamReader reader = new StreamReader(NameBuilder(id));
             Employee emp = new Employee(reader.ReadLine(), reader.ReadLine());
             emp.Id = long.Parse(reader.ReadLine());
+            reader.Close();
             return emp;
+        }
+
+        public List<Employee> FindAllEmployees()
+        {
+            return this.employees;
         }
 
         private string NameBuilder(long id)

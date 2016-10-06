@@ -21,6 +21,26 @@
 
         }
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            Employee emp = (Employee)obj;
+            if (emp.Id == this.id && emp.Name == this.name && emp.Type == this.type)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
 
 
 
@@ -33,6 +53,7 @@
         public string Type
         {
             get { return type; }
+            set { type = value; }
         }
 
         public long Id
