@@ -28,12 +28,15 @@
 
         public override bool Equals(object obj)
         {
-            Employee emp = (Employee)obj;
-            if (emp.Id == this.id && emp.Name == this.name && emp.Type == this.type)
+            if (obj is Employee)
             {
-                return true;
+                Employee emp = obj as Employee;
+                if (emp.Id != this.id || emp.Name != this.name || emp.Type != this.type)
+                {
+                    return false;
+                }
             }
-            else return false;
+            return true;
         }
 
         public override int GetHashCode()
